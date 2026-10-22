@@ -10,6 +10,7 @@ function App() {
     return (
         <div>
             <h1>Mon Pokédex</h1>
+            <Pokemon nom="pikachu" element="electrique" />
         </div>
     )
 }
