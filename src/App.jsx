@@ -1,18 +1,30 @@
 import Pokemon from './components/Pokemon.jsx'
 
 const pokemons = [
-            {id: 1, nom: "pikachu", element: "electrique"},
-            {id: 2, nom: "bulbizar", element: "plante"},
-            {id: 3, nom: "carapuce", element: "eau"},
-        ];
+]
+
+
 function App() {
 
     return (
         <div>
             <h1>Mon Pokédex</h1>
-            <Pokemon nom="pikachu" element="electrique" />
+
+            {pokemons.length === 0 ? (
+                <p>Aucun pokemon disponible.</p>
+            ) : (
+            pokemons.map((pokemon) => (
+            <Pokemon 
+            key={pokemon.id}
+            nom={pokemon.nom}
+            element={pokemon.element} 
+            />
+            ))
+        )}
+   
         </div>
-    )
-}
+
+         )};
+    
 
 export default App
