@@ -15,7 +15,18 @@ function App() {
             return response.json()
         })
         .then((data) => {
-            console.log(data)
+            const requetes = data.results.map((pokemon) =>
+            fetch(pokemon.url).then((response) => {
+                if (!response.ok) {
+                    throw new Error("Erreur lors des détails")
+                }
+                return response.json()
+            }))
+            return Promise.all(requetes)
+        })
+        .then((details) => {
+            console.log(details)
+            setPokemons(details)
         })
         .catch((error) => {
             console.error(error)
@@ -33,8 +44,9 @@ function App() {
             pokemons.map((pokemon) => (
             <Pokemon 
             key={pokemon.id}
-            nom={pokemon.nom}
-            element={pokemon.element} 
+            nom={pokemon.name}
+            element={pokemon.types.map((t) => t.type.name).join(", ")}
+            image={pokemon.sprites.front_default} 
             />
             ))
         )}
