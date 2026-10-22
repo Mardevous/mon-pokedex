@@ -1,10 +1,27 @@
+import { useState, useEffect } from 'react'
 import Pokemon from './components/Pokemon.jsx'
-
-const pokemons = [
-]
 
 
 function App() {
+
+    const [pokemons, setPokemons] = useState([])
+
+    useEffect(() => {
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=3")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Erreur lors de la récupération")
+            }
+            return response.json()
+        })
+        .then((data) => {
+            console.log(data)
+        })
+        .catch((error) => {
+            console.error(error)
+        })
+
+    }, [])
 
     return (
         <div>
