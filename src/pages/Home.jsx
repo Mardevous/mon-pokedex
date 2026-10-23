@@ -57,6 +57,7 @@ function Home() {
             nom={pokemon.name}
             element={pokemon.types.map((t) => t.type.name).join(", ")}
             image={pokemon.sprites.front_default} 
+            id ={pokemon.id}
             />
             ))
         )}

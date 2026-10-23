@@ -1,6 +1,6 @@
 import { Routes, Route, Link } from 'react-router-dom'
 import Home from './pages/Home.jsx'
-
+import PokeDetails from './pages/PokeDetails.jsx'
 
 function App() {
 
@@ -11,6 +11,7 @@ function App() {
             </nav>
             <Routes>
                 <Route path="/" element={<Home/>} />
+                <Route path="/poke/:id" element={<PokeDetails />} />
             </Routes>
         </div>
 
