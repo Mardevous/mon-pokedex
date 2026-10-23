@@ -5,6 +5,8 @@ import Pokemon from './components/Pokemon.jsx'
 function App() {
 
     const [pokemons, setPokemons] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [erreur, setErreur] = useState(null)
 
     useEffect(() => {
         fetch("https://pokeapi.co/api/v2/pokemon?limit=3")
@@ -30,6 +32,10 @@ function App() {
         })
         .catch((error) => {
             console.error(error)
+            setErreur(error.message)
+        })
+        .finally(() => {
+            setIsLoading(false)
         })
 
     }, [])
@@ -38,7 +44,11 @@ function App() {
         <div>
             <h1>Mon Pokédex</h1>
 
-            {pokemons.length === 0 ? (
+            {isLoading ? (
+                <p>Chargement des Pokémons...</p>
+            ) : erreur ? (
+                <p>Erreur : {erreur}</p>
+            ) : pokemons.length === 0 ? (
                 <p>Aucun pokemon disponible.</p>
             ) : (
             pokemons.map((pokemon) => (
