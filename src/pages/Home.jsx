@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import Pokemon from '../components/Pokemon.jsx'
+import api from '../services/api.js'
+import Pagination from '../components/Pagination.jsx'
 
 
 function Home() {
@@ -7,22 +9,25 @@ function Home() {
     const [pokemons, setPokemons] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [erreur, setErreur] = useState(null)
+    const [page, setPage] = useState(1)
+    const [hasNext, setHasNext] = useState(true)
+
+    const limit = 3
+    const offset = (page - 1) * limit
 
     useEffect(() => {
-        fetch("https://pokeapi.co/api/v2/pokemon?limit=3")
+        setIsLoading(true)
+        setErreur(null)
+
+        api.get(`/pokemon?limit=${limit}&offset=${offset}`)
         .then((response) => {
-            if (!response.ok) {
-                throw new Error("Erreur lors de la récupération")
-            }
-            return response.json()
+            return response.data
         })
         .then((data) => {
+            setHasNext(data.next !== null)
             const requetes = data.results.map((pokemon) =>
-            fetch(pokemon.url).then((response) => {
-                if (!response.ok) {
-                    throw new Error("Erreur lors des détails")
-                }
-                return response.json()
+            api.get(pokemon.url).then((response) => {
+                return response.data
             }))
             return Promise.all(requetes)
         })
@@ -38,7 +43,7 @@ function Home() {
             setIsLoading(false)
         })
 
-    }, [])
+    }, [page])
 
     return (
         <div>
@@ -61,6 +66,12 @@ function Home() {
             />
             ))
         )}
+            <Pagination
+            page={page}
+            setPage={setPage}
+            hasNext={hasNext}
+            isLoading={isLoading}
+            />
    
         </div>
 
