@@ -1,16 +1,28 @@
 import {useState} from 'react'
+import backendApi from '../services/backendApi'
 
 function AddPokemon () {
     const [nom, setNom] = useState('')
     const [type, setType] = useState('')
 
-    function handleSubmit(e) {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+
         const nouveauPokemon = {
             name: nom,
             type: type
         }
-        api.post('/pokemon', nouveauPokemon)
+
+        try {
+            const response = await backendApi.post('/pokemon', nouveauPokemon)
+            console.log('Pokémon enregistré :', response.data)
+
+            setNom('')
+            setType('')
+        } catch (error) {
+            console.error("Erreur lors de l'ajout du Pokémon :", error)
+        }
+        
     }
 
     return (
