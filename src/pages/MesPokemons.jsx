@@ -1,5 +1,5 @@
-import { useState, useEffet } from 'react'
-import backendApi from '../services/backendApi'
+import { useState, useEffect } from 'react'
+import backendApi from '../services/backendApi.js'
 
 function MesPokemons() {
     const [pokemons, setPokemons] = useState([])
@@ -7,7 +7,7 @@ function MesPokemons() {
     const [erreur, setErreur] = useState(null)
 
     useEffect(() => {
-        backendApi.get('/pokemons')
+        backendApi.get('/pokemon')
             .then((response) => {
                 setPokemons(response.data)
             })
@@ -19,6 +19,19 @@ function MesPokemons() {
                 setIsLoading(false)
             })
     }, [])
+
+    const supprimerPokemon = async (id) => {
+        try {
+            await backendApi.delete(`/pokemon/${id}`)
+
+            setPokemons((anciensPokemons) =>
+                anciensPokemons.filter((pokemon) => pokemon.id !== id)
+        )
+    } catch(error) {
+        console.error('Error lors de la suppression :', error)
+        setErreur('Impossible de supprimer le Pokémon')
+    }
+    }
 
 if (isLoading) {
     return <p>Chargement des Pokémons...</p>
@@ -39,6 +52,10 @@ return (
                 <div key={pokemon.id}>
                     <h2>{pokemon.name}</h2>
                     <p>Type : {pokemon.type}</p>
+
+                    <button onClick={() => supprimerPokemon(pokemon.id)}>
+                        Supprimer
+                    </button>
                  </div>
             ))
         )

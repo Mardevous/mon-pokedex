@@ -3,5 +3,10 @@
     "id": "7f309484-fd3e-4641-8d5f-b51a62ad950a",
     "name": "Salamèche",
     "type": "Feu"
+  },
+  {
+    "id": "618c76ea-15b9-4bec-8a4e-dc6f4d835e67",
+    "name": "Carapuce",
+    "type": "Eau"
   }
 ]

@@ -76,6 +76,42 @@ app.get('/pokemon', async (req, res) => {
     }
 })
 
+app.delete('/pokemon', async (req, res) => {
+    const {id} = req.params
+
+    try {
+        const contenu = await fs.readFile(fichierPokemons, 'utf8')
+        const pokemons = JSON.parse(contenu)
+
+        const nouveauxPokemons = pokemons.filter(
+            (pokemon) => pokemon.id !== id
+        )
+
+        if (nouveauxPokemons.length === pokemons.length) {
+            return res.status(404).json({
+                message: 'Pokemon introuvable'
+            })
+        }
+        
+        await fs.writeFile(
+            fichierPokemons,
+            JSON.stringify(nouveauxPokemons, null, 2),
+            'utf8'
+        )
+
+        res.status(200).json({
+            message: 'Pokemon supprimé avec succès'
+        })
+
+        } catch (error) {
+            console.error(error)
+            res.status(500).json({
+                message: 'Erreur lors de la suppresion du Pokémon'
+            })
+        }
+    }
+)
+
 app.listen(PORT, () => {
     console.log(`Serveur démarré sur http://localhost:${PORT}`)
 })

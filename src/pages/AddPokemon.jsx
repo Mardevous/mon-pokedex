@@ -4,6 +4,7 @@ import backendApi from '../services/backendApi'
 function AddPokemon () {
     const [nom, setNom] = useState('')
     const [type, setType] = useState('')
+    const [message, setMessage] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -16,11 +17,13 @@ function AddPokemon () {
         try {
             const response = await backendApi.post('/pokemon', nouveauPokemon)
             console.log('Pokémon enregistré :', response.data)
+            setMessage('Pokémon enregistré avec succès !')
 
             setNom('')
             setType('')
         } catch (error) {
             console.error("Erreur lors de l'ajout du Pokémon :", error)
+            setMessage("Erreur lors de l'enregistrement du Pokémon.")
         }
         
     }
@@ -51,6 +54,7 @@ function AddPokemon () {
                 </div>
                 <button type="submit">Ajouter</button>
             </form>
+            {message && <p>{message}</p>}
         </div>
     )
 }
