@@ -76,7 +76,7 @@ app.get('/pokemon', async (req, res) => {
     }
 })
 
-app.delete('/pokemon', async (req, res) => {
+app.delete('/pokemon/:id', async (req, res) => {
     const {id} = req.params
 
     try {
