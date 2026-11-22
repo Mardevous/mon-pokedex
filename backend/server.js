@@ -5,7 +5,7 @@ const path = require('node:path')
 const { randomUUID } = require('node:crypto')
 
 const app = express()
-const PORT = 3000
+const PORT = port.env.PORT || 3000
 const fichierPokemons = path.join(__dirname, 'pokemons.json')
 
 app.use(cors())
@@ -113,8 +113,8 @@ app.delete('/pokemon/:id', async (req, res) => {
 )
 
 if (require.main === module) {
-    app.listen(PORT, () => {
-        console.log(`Serveur démarré sur http://localhost:${PORT}`)
+    app.listen(PORT, '0.0.0.0', () => {
+        console.log(`Serveur démarré sur le port ${PORT}`)
     })
 }
 
