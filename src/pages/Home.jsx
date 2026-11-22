@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Pokemon from '../components/Pokemon.jsx'
 import api from '../services/api.js'
 import Pagination from '../components/Pagination.jsx'
+import { calculerOffset } from '../utils/pagination.js';
 
 
 function Home() {
@@ -13,7 +14,7 @@ function Home() {
     const [hasNext, setHasNext] = useState(true)
 
     const limit = 3
-    const offset = (page - 1) * limit
+    const offset = calculerOffset(page, limit)
 
     useEffect(() => {
         setIsLoading(true)
