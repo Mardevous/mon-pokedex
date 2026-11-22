@@ -5,6 +5,7 @@ function MesPokemons() {
     const [pokemons, setPokemons] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [erreur, setErreur] = useState(null)
+    const [erreurSuppression, setErreurSuppression] = useState(null)
 
     useEffect(() => {
         backendApi.get('/pokemon')
@@ -21,17 +22,19 @@ function MesPokemons() {
     }, [])
 
     const supprimerPokemon = async (id) => {
-        try {
-            await backendApi.delete(`/pokemon/${id}`)
+    setErreurSuppression(null)
 
-            setPokemons((anciensPokemons) =>
-                anciensPokemons.filter((pokemon) => pokemon.id !== id)
+    try {
+        await backendApi.delete(`/pokemon/${id}`)
+
+        setPokemons((anciensPokemons) =>
+            anciensPokemons.filter((pokemon) => pokemon.id !== id)
         )
-    } catch(error) {
-        console.error('Error lors de la suppression :', error)
-        setErreur('Impossible de supprimer le Pokémon')
+    } catch (error) {
+        console.error('Erreur lors de la suppression :', error)
+        setErreurSuppression('Impossible de supprimer le Pokémon')
     }
-    }
+}
 
 if (isLoading) {
     return <p>Chargement des Pokémons...</p>
@@ -44,6 +47,10 @@ if (erreur) {
 return (
     <div>
         <h1> Mes Pokémons </h1>
+
+        {erreurSuppression && (
+    <p role="alert">{erreurSuppression}</p>
+)}
 
         {pokemons.length === 0 ? (
             <p>Aucun Pokémon enregistré</p>

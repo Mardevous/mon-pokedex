@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import Pokemon from '../components/Pokemon.jsx'
 import api from '../services/api.js'
 import Pagination from '../components/Pagination.jsx'
-import { calculerOffset } from '../utils/pagination.js';
+import { calculerOffset } from '../utils/pagination.js'
+import usePokemonStore from '../store/usePokemonStore.js'
 
 
 function Home() {
@@ -10,8 +11,9 @@ function Home() {
     const [pokemons, setPokemons] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [erreur, setErreur] = useState(null)
-    const [page, setPage] = useState(1)
     const [hasNext, setHasNext] = useState(true)
+    const page = usePokemonStore((state) => state.page)
+    const setPage = usePokemonStore((state) => state.setPage)
 
     const limit = 3
     const offset = calculerOffset(page, limit)

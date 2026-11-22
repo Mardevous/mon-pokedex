@@ -1,12 +1,12 @@
 [
   {
-    "id": "618c76ea-15b9-4bec-8a4e-dc6f4d835e67",
-    "name": "Carapuce",
-    "type": "Eau"
-  },
-  {
     "id": "e5c06a40-945e-4409-ab75-3b47831799f4",
     "name": "Salamèche",
     "type": "Feu"
+  },
+  {
+    "id": "a50c343a-c265-4579-a367-647f2ddc7c18",
+    "name": "Carapuce",
+    "type": "Eau"
   }
 ]
