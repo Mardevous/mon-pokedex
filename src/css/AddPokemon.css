@@ -1,0 +1,188 @@
+/* ===== PAGE AJOUT ===== */
+
+.add-page {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  animation: fadeIn 0.35s ease;
+}
+
+.add-hero {
+  background: linear-gradient(135deg, #c7dfff, #a8cdf8);
+  border-radius: 28px;
+  padding: 45px;
+  box-shadow: var(--shadow);
+}
+
+.add-hero-label {
+  color: #315d91;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.add-hero h1 {
+  margin: 15px 0;
+  color: var(--primary-dark);
+}
+
+.add-hero p {
+  color: #315d91;
+  line-height: 1.7;
+}
+
+/* Carte du formulaire */
+
+.add-card {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 40px;
+  background: white;
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.add-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.add-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e4f0ff;
+  color: var(--primary);
+  border-radius: 14px;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.add-card-heading h2 {
+  margin: 0 0 5px;
+  font-size: 23px;
+}
+
+.add-card-heading p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Champs */
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.add-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.add-field label {
+  color: var(--primary-dark);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.add-field input {
+  width: 100%;
+  background: #f0f6ff;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  padding: 15px 18px;
+  color: var(--primary-dark);
+  font-size: 15px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.add-field input::placeholder {
+  color: #91a7c1;
+}
+
+.add-field input:focus {
+  background: white;
+  border-color: #70a8e8;
+}
+
+/* Bouton */
+
+.add-submit {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 30px;
+  background: var(--primary);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.add-submit:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.add-submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+/* Messages */
+
+.add-message {
+  padding: 15px;
+  border-radius: 14px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.add-message.success {
+  background: #e4f7eb;
+  color: #237346;
+}
+
+.add-message.error {
+  background: #fff0f0;
+  color: #b43c3c;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .add-hero {
+    padding: 30px 25px;
+  }
+
+  .add-card {
+    padding: 25px 20px;
+  }
+
+  .add-card-heading {
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .add-submit {
+    transition: none;
+  }
+
+  .add-submit:hover:not(:disabled) {
+    transform: none;
+  }
+}

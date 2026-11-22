@@ -1,0 +1,266 @@
+:root {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #173b68;
+  background: #eaf3ff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --primary: #174b87;
+  --primary-dark: #10345e;
+  --secondary: #bcd8fb;
+  --background: #eaf3ff;
+  --surface: #ffffff;
+  --text: #173b68;
+  --muted: #607c9f;
+  --shadow: 0 10px 30px rgba(26, 70, 125, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--background);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Structure principale */
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  width: min(1100px, calc(100% - 40px));
+  margin: 40px auto;
+  flex: 1;
+  animation: fadeIn 0.35s ease;
+}
+
+/* Navigation */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(30, 75, 135, 0.07);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px max(24px, calc((100% - 1100px) / 2));
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-dark);
+  font-size: 25px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.logo-icon {
+  background: var(--primary);
+  color: white;
+  border-radius: 12px;
+  padding: 6px 10px;
+  font-size: 20px;
+}
+
+.logo-dot {
+  color: #4b91dc;
+  margin-left: -8px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* Bouton hamburger masqué sur ordinateur */
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: #e8f2ff;
+  color: var(--primary);
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.menu-toggle:hover {
+  background: #d5e8ff;
+}
+
+.menu-toggle:focus-visible,
+.nav-link:focus-visible {
+  outline: 3px solid #70a8e8;
+  outline-offset: 3px;
+}
+
+
+.nav-link {
+  text-decoration: none;
+  color: var(--muted);
+  padding: 11px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.nav-link:hover {
+  background: #e8f2ff;
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* Titres */
+
+h1 {
+  color: var(--primary-dark);
+  font-size: clamp(32px, 5vw, 52px);
+  letter-spacing: -1.5px;
+  line-height: 1.15;
+}
+
+h2,
+h3 {
+  color: var(--primary-dark);
+}
+
+/* Chargement */
+
+.loading-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Pied de page */
+
+.footer {
+  text-align: center;
+  padding: 25px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Animation */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    padding: 14px 20px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .navbar {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding-top: 18px;
+  }
+
+  .navbar.navbar-open {
+    display: flex;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
+  .nav-link:hover {
+    transform: none;
+  }
+
+  .main-content {
+    width: calc(100% - 28px);
+    margin: 24px auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
